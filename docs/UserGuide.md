@@ -104,38 +104,32 @@ Examples:
 * `task add Another task`
 
 
-### Viewing tasks of a person: `tasks`
+### Marking tasks as complete: `task mark`
 
-Lists all the task(s) that have been assigned to the specified person.
+Marks a task as complete.
 
-Format: `tasks INDEX`
-* Views the tasks of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+Format: `task mark INDEX`
 
-Examples:
-* `list` followed by `tasks 2` shows the task assigned to the 2nd person in the address book.
-* `find Betsy` followed by `tasks 1` shows the tasks assigned to the 1st person in the result of the `find` command.
-
-
-### Marking tasks of a person: `mark`
-
-Marks a task of a person as complete or incomplete.
-
-Format: `mark TASK_INDEX p/PERSON_INDEX`
-* Marks the task at the specified TASK_INDEX of the person specified at CONTACT_INDEX.
+* Marks the task at the specified `INDEX` as complete.
+* The index refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `mark 1 p/2` marks the 1st task from the 2nd person in the address book as complete.
+* `task mark 1`
 
 
-### Deleting tasks of a person: `deletetask`
+### Deleting tasks: `task delete`
 
-Deletes the specified task from the person in the address book.
+Deletes the specified task from the task panel.
 
-Format: `deletetask TASK_INDEX p/PERSON_INDEX`
-* Deletes the task at the specified TASK_INDEX of the person specified at CONTACT_INDEX.
+Format: `task delete INDEX`
+
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `deletetask 1 p/2` delete the 1st task from the 2nd person in the address book.
+* `task delete 1`
 
 
 ### Listing all persons : `list`
@@ -143,6 +137,7 @@ Examples:
 Shows a list of all persons in the address book.
 
 Format: `list`
+
 
 ### Editing a person : `edit`
 
@@ -236,9 +231,10 @@ _Details coming soon ..._
 |-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Task add**    | `task add DESC`<br> e.g., `task add Title of task`                                                                                                                    |
-| **Tasks**       | `tasks INDEX`<br> e.g., `tasks 2`                                                                                                                                     |
-| **Mark**        | `mark TASK_INDEX p/PERSON_INDEX`<br> e.g., `mark 2 p/3`                                                                                                               |
-| **Task delete** | `task delete TASK_INDEX p/PERSON_INDEX`<br> e.g., `delete 2 p/3`                                                                                                      |
+| **Task list**   | `task list`                                                                                                                                                           |
+| **Task mark**   | `task mark INDEX`<br> e.g., `task mark 2`                                                                                                                             |
+| **Task delete** | `task delete INDEX`<br> e.g., `task delete 2`                                                                                                                         |
+| **Task assign** | `task assign INDEX c/PERSON_INDEX c/PERSON_INDEX`<br> e.g., `task assign 1 c/1 c/2`                                                                                   |
 | **Clear**       | `clear`                                                                                                                                                               |
 | **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
