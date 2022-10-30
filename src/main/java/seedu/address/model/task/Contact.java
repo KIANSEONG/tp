@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.List;
 import java.util.Locale;
@@ -9,12 +10,14 @@ import seedu.address.model.person.Person;
 
 /**
  * Contact is a Person who is related to a task and is present in the address book.
- * Guarantees: immutable; contact is valid as declared in {@link #isValidContactName(String)}
+ * Guarantees: immutable; contact is valid as declared in {@link #isValidContact(String)}
  */
 public class Contact {
 
-    public static final String MESSAGE_CONSTRAINTS = "Contact names should be letters";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z ]*$";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+
+    public static final String VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} ]*";
 
     private final String contactName;
 
@@ -25,6 +28,7 @@ public class Contact {
      */
     public Contact(String contactName) {
         requireNonNull(contactName);
+        checkArgument(isValidContact(contactName), MESSAGE_CONSTRAINTS);
         this.contactName = contactName;
     }
 
@@ -33,14 +37,13 @@ public class Contact {
      * @param person given Person
      */
     public Contact(Person person) {
-        requireNonNull(person);
-        this.contactName = person.getName().toString();
+        this(person.getName().toString());
     }
 
     /**
      * Returns true if a given string is a valid contact name.
      */
-    public static boolean isValidContactName(String test) {
+    public static boolean isValidContact(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

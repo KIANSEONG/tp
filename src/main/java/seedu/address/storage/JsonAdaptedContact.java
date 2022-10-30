@@ -39,7 +39,7 @@ class JsonAdaptedContact {
      * @throws IllegalValueException if there were any data constraints violated in the adapted contact.
      */
     public Contact toModelType() throws IllegalValueException {
-        if (!Contact.isValidContactName(contactName)) {
+        if (!Contact.isValidContact(contactName)) {
             throw new IllegalValueException(Contact.MESSAGE_CONSTRAINTS);
         }
         return new Contact(contactName);

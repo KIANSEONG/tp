@@ -20,7 +20,7 @@ public class JsonAdaptedTaskTest {
 
     private static final String INVALID_TITLE = " ";
     private static final String INVALID_DONE = " ";
-    private static final String INVALID_CONTACT = "TEST3";
+    private static final String INVALID_CONTACT = "-";
 
     private static final String VALID_TITLE = TASK_ONE.getTitle().toString();
     private static final String VALID_DONE = "false";
