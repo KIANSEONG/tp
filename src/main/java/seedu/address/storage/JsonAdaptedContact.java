@@ -25,7 +25,7 @@ class JsonAdaptedContact {
      * Converts a given {@code Contact} into this class for Jackson use.
      */
     public JsonAdaptedContact(Contact source) {
-        contactName = source.contactName;
+        contactName = source.getContactName();
     }
 
     @JsonValue

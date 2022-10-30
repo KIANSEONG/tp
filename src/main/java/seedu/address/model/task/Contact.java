@@ -7,8 +7,6 @@ import java.util.Locale;
 
 import seedu.address.model.person.Person;
 
-
-
 /**
  * Contact is a Person who is related to a task and is present in the address book.
  * Guarantees: immutable; contact is valid as declared in {@link #isValidContactName(String)}
@@ -18,17 +16,25 @@ public class Contact {
     public static final String MESSAGE_CONSTRAINTS = "Contact names should be letters";
     public static final String VALIDATION_REGEX = "^[a-zA-Z ]*$";
 
-    public final String contactName;
+    private final String contactName;
 
     /**
      * Constructs a {@code Contact}.
      *
-     * @param contactName A valid contact name.
+     * @param contactName A valid contact name
      */
     public Contact(String contactName) {
-        // TODO: Contact must be in address book
         requireNonNull(contactName);
         this.contactName = contactName;
+    }
+
+    /**
+     * Constructs a {@code Contract} from a Person.
+     * @param person given Person
+     */
+    public Contact(Person person) {
+        requireNonNull(person);
+        this.contactName = person.getName().toString();
     }
 
     /**

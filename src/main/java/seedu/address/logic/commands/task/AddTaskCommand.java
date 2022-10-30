@@ -6,15 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.TaskCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.TaskParserUtil;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.task.Contact;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Project;
@@ -53,7 +52,6 @@ public class AddTaskCommand extends TaskCommand {
     private final Deadline deadline;
     private final Project project;
     private final Set<Index> contactIndexes;
-    private final Set<Contact> assignedContacts = new HashSet<>();
 
     /**
      * Creates an AddTaskCommand to add the specified {@code Task}
@@ -80,13 +78,7 @@ public class AddTaskCommand extends TaskCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownPersonList = model.getFilteredPersonList();
-
-        for (Index index : contactIndexes) {
-            Contact toAssign = new Contact(lastShownPersonList.get(index.getZeroBased()).getName().toString());
-            assignedContacts.add(toAssign);
-        }
-
+        Set<Contact> assignedContacts = TaskParserUtil.indexesToContacts(contactIndexes, model.getFilteredPersonList());
         Task toAdd = new Task(title, deadline, project, assignedContacts);
 
         if (model.hasTask(toAdd)) {

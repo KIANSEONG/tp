@@ -56,7 +56,7 @@ public class AssignedToContactsPredicate implements Predicate<Task> {
         return contacts;
     }
     public String getContactNames() {
-        return contacts.stream().map(c -> c.contactName).collect(Collectors.joining(", "));
+        return contacts.stream().map(Contact::getContactName).collect(Collectors.joining(", "));
     }
 
     @Override

@@ -15,6 +15,7 @@ import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 import seedu.address.model.task.Contact;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Project;
@@ -157,6 +158,18 @@ public class TaskParserUtil {
             }
         }
         return textSet;
+    }
+
+    /**
+     * Converts
+     */
+    public static Set<Contact> indexesToContacts(Set<Index> indexes, List<Person> personList) {
+        Set<Contact> contacts = new HashSet<>();
+        for (Index i : indexes) {
+            Contact toAssign = new Contact(personList.get(i.getZeroBased()));
+            contacts.add(toAssign);
+        }
+        return contacts;
     }
 
     /**
