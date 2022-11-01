@@ -77,6 +77,20 @@ public class Task {
     }
 
     /**
+     * Adds a contact to the list of assigned contacts.
+     */
+    public void addContact(Contact contact) {
+        assignedContacts.add(contact);
+    }
+
+    /**
+     * Removes a contact from the list of assigned contacts.
+     */
+    public void removeContact(Contact contact) {
+        assignedContacts.remove(contact);
+    }
+
+    /**
      * Returns true if both task have the same title and size.
      * This defines a weaker notion of equality between two tasks.
      */

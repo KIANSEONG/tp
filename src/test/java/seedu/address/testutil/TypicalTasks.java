@@ -16,7 +16,8 @@ public class TypicalTasks {
             new TaskBuilder()
                     .withTitle("Add tasks to list")
                     .withCompleted(false)
-                    .withDeadline("?")
+                    .withDeadline("UNSPECIFIED")
+                    .withProject("")
                     .withContacts("Alice Pauline")
                     .build();
     public static final Task TASK_TWO =

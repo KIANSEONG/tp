@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Contact;
 import seedu.address.model.task.Task;
 
 /**
@@ -197,7 +198,6 @@ public class ModelManager implements Model {
     @Override
     public void addTask(Task task) {
         taskPanel.addTask(task);
-        // TODO: updateFilteredTaskList
     }
 
     @Override
@@ -208,5 +208,15 @@ public class ModelManager implements Model {
     @Override
     public void setTask(Task target, Task editedTask) {
         taskPanel.setTask(target, editedTask);
+    }
+
+    @Override
+    public void assignPersonToTask(Task task, Person person) {
+        task.addContact(new Contact(person));
+    }
+
+    @Override
+    public void unassignPersonFromTask(Task task, Person person) {
+        task.removeContact(new Contact(person));
     }
 }

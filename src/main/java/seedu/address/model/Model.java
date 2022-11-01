@@ -143,4 +143,16 @@ public interface Model {
      * The task of {@code editedTask} must not be the same as another existing task in the address book.
      */
     void setTask(Task target, Task editedTask);
+
+    /**
+     * Assigns the given {@code person} to the task {@code task}.
+     * {@code task} must exist in the task panel and {@code person} must exist in the address book.
+     */
+    void assignPersonToTask(Task task, Person person);
+
+    /**
+     * Unassigns the given {@code person} from the task {@code task}.
+     * {@code task} must exist in the task panel and {@code person} must exist in the address book.
+     */
+    void unassignPersonFromTask(Task task, Person person);
 }

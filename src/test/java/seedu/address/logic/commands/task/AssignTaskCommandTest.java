@@ -21,13 +21,15 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TaskPanel;
 import seedu.address.model.UserPrefs;
 
 public class AssignTaskCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTaskPanel(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalTaskPanel(), new UserPrefs());
 
     @Test
     public void execute_invalidTaskIndex_throwsCommandException() {
@@ -41,7 +43,7 @@ public class AssignTaskCommandTest {
     @Test
     public void execute_invalidPersonAddIndex_throwsCommandException() {
         Index outOfBoundPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        HashSet<Index> invalidAssignedPersons = new HashSet<Index>();
+        HashSet<Index> invalidAssignedPersons = new HashSet<>();
         invalidAssignedPersons.add(outOfBoundPersonIndex);
         AssignTaskCommand assignTaskCommand = new AssignTaskCommand(INDEX_FIRST_TASK, invalidAssignedPersons,
                 new HashSet<>(), new HashSet<>(), new HashSet<>());
@@ -87,7 +89,7 @@ public class AssignTaskCommandTest {
     @Test
     public void execute_personToAddAlreadyAdded_throwsCommandException() {
         AssignTaskCommand assignTaskCommand = new AssignTaskCommand(INDEX_FIRST_TASK, new HashSet<>(),
-                new HashSet<>(Arrays.asList("Alice Pauline")), new HashSet<>(), new HashSet<>());
+                new HashSet<>(List.of("Alice Pauline")), new HashSet<>(), new HashSet<>());
 
         assertCommandFailure(assignTaskCommand, model,
                 String.format(AssignTaskCommand.MESSAGE_REPEATED_CONTACT,
@@ -107,10 +109,12 @@ public class AssignTaskCommandTest {
     @Test
     public void execute_validTaskIndexAndAddPersonsName_assignSuccessful() throws Exception {
         AssignTaskCommand assignTaskCommand = new AssignTaskCommand(INDEX_FIRST_TASK,
-                new HashSet<>(), new HashSet<>(Arrays.asList("George Best")),
+                new HashSet<>(), new HashSet<>(List.of("George Best")),
                 new HashSet<>(), new HashSet<>());
 
-        CommandResult commandResult = assignTaskCommand.execute(model);
+        Model expectedModel = new ModelManager(
+            new AddressBook(model.getAddressBook()), new TaskPanel(model.getTaskPanel()), new UserPrefs());
+        CommandResult commandResult = assignTaskCommand.execute(expectedModel);
 
         assertEquals(String.format(AssignTaskCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getOneBased()),
                 commandResult.getFeedbackToUser());
@@ -122,7 +126,9 @@ public class AssignTaskCommandTest {
                 new HashSet<>(Arrays.asList(INDEX_SECOND_PERSON)), new HashSet<>(),
                 new HashSet<>(), new HashSet<>());
 
-        CommandResult commandResult = assignTaskCommand.execute(model);
+        Model expectedModel = new ModelManager(
+            new AddressBook(model.getAddressBook()), new TaskPanel(model.getTaskPanel()), new UserPrefs());
+        CommandResult commandResult = assignTaskCommand.execute(expectedModel);
 
         assertEquals(String.format(AssignTaskCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getOneBased()),
                 commandResult.getFeedbackToUser());
@@ -134,7 +140,9 @@ public class AssignTaskCommandTest {
                 new HashSet<>(), new HashSet<>(),
                 new HashSet<>(Arrays.asList(INDEX_FIRST_PERSON)), new HashSet<>());
 
-        CommandResult commandResult = assignTaskCommand.execute(model);
+        Model expectedModel = new ModelManager(
+            new AddressBook(model.getAddressBook()), new TaskPanel(model.getTaskPanel()), new UserPrefs());
+        CommandResult commandResult = assignTaskCommand.execute(expectedModel);
 
         assertEquals(String.format(AssignTaskCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getOneBased()),
                 commandResult.getFeedbackToUser());
@@ -144,9 +152,11 @@ public class AssignTaskCommandTest {
     public void execute_validTaskIndexAndDeletePersonsName_assignSuccessful() throws Exception {
         AssignTaskCommand assignTaskCommand = new AssignTaskCommand(INDEX_FIRST_TASK,
                 new HashSet<>(), new HashSet<>(),
-                new HashSet<>(), new HashSet<>(Arrays.asList("Alice Pauline")));
+                new HashSet<>(), new HashSet<>(List.of("Alice Pauline")));
 
-        CommandResult commandResult = assignTaskCommand.execute(model);
+        Model expectedModel = new ModelManager(
+            new AddressBook(model.getAddressBook()), new TaskPanel(model.getTaskPanel()), new UserPrefs());
+        CommandResult commandResult = assignTaskCommand.execute(expectedModel);
 
         assertEquals(String.format(AssignTaskCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getOneBased()),
                 commandResult.getFeedbackToUser());
